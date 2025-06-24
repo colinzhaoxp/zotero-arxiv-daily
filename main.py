@@ -99,7 +99,7 @@ def add_argument(*args, **kwargs):
 
 
 if __name__ == '__main__':
-    
+    add_argument("--embedding_model", type=str, help="embedding model name or path")
     add_argument('--zotero_id', type=str, help='Zotero user ID')
     add_argument('--zotero_key', type=str, help='Zotero API key')
     add_argument('--zotero_ignore',type=str,help='Zotero collection to ignore, using gitignore-style pattern.')
@@ -169,7 +169,7 @@ if __name__ == '__main__':
           exit(0)
     else:
         logger.info("Reranking papers...")
-        papers = rerank_paper(papers, corpus)
+        papers = rerank_paper(papers, corpus, args.embedding_model)
         if args.max_paper_num != -1:
             papers = papers[:args.max_paper_num]
         if args.use_llm_api:
